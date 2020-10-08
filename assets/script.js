@@ -1,3 +1,4 @@
+//Code for global variables for script.
 var startButton = document.getElementById("start");
 var timeHolder = document.getElementById("timeHolder");
 var instructions = document.getElementById("instructions");
@@ -11,6 +12,8 @@ var numCorrect = 0;
 var game = document.getElementById("game");
 var question = document.getElementById("question");
 var options = document.getElementById("options");
+
+//Code for questions array containing the objects for each question.
 var questionsArray = [{
         question: "1. What is the main programming language used to make interactive web pages?",
         choices: ["a. python", "b. java", "c. C++", "d. Javascript"],
@@ -64,17 +67,19 @@ var questionsArray = [{
 ];
 
 
+//Code for the start button that begins the quiz and hides the instructions.
 startButton.addEventListener("click", function () {
     startButton.classList.add("hide");
     timeHolder.classList.remove("hide");
     quizInstructions.classList.add("hide");
     downloadTimer = setInterval(countDown, 1000);
     newQuestion();
+
 });
 
+
+//Code for the timer functionality and display. Counts down every second until 0.
 function countDown() {
-
-
     timeLeft--;
     timerDisplay.textContent = timeLeft;
     if (timeLeft <= 0) {
@@ -85,6 +90,8 @@ function countDown() {
     }
 }
 
+
+//Code for the end of the quiz. Prompts the user to enter their initials to record their score. Also uses local storage to access the verified score and records it on the High Score page.
 function endQuiz() {
     console.log("End quiz function called.");
     quizInstructions.remove();
@@ -97,6 +104,8 @@ function endQuiz() {
         userInitials: initials,
         userScore: numCorrect
     };
+
+    // Code used to access local storage and track the high scores.
     var savedScores = localStorage.getItem('highscore') || '[]';
     var listOfScores = [...JSON.parse(savedScores), currentScore];
     listOfScores.sort((a, b) => b.userScore - a.userScore);
@@ -112,6 +121,7 @@ function endQuiz() {
 }
 
 
+//Code for the question generator that goes to the next question in the array after the current question is answered.
 function newQuestion() {
     var currentQuestion = questionsArray[index];
     question.textContent = currentQuestion.question;
@@ -126,6 +136,8 @@ function newQuestion() {
     }
 }
 
+
+//Verifies the answers inputed by the user for each question inside the console. If it matches then it is marked correct. If it does not match, then it is marked incorrect. Calls the end quiz function if there are no remaining questions.
 function verify() {
     console.log("verify");
     var buttonValue = this.value;
