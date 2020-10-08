@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
+
 <body>
-    <h1>Web APIs Quiz</h1>
+    <main class="container">
+    <div class="jumbotron justify-content-center" id="instructions">
+        <h1 class="display-4" id="quizHeader">Coding Quiz</h1>
+        <p class="lead" id="quizInstructions">Click the start button to begin the ten question timed quiz. You will have 150 seconds to complete the quiz (average 15 seconds per question). If a question is answered incorrectly, then you will receive a 5 second penalty for each wrong answer. Answer all questions as quickly and accurately as possible within
+            the alloted time. If you do not complete all questions by the end of the timer, then the game is over. At the end of the quiz type your initials to save your score.</p>
+            <hr class="my-4">
+        <div class="row">
+            <div class="col-4">
+                <button class="btn btn-primary btn-lg" id="start">Start Quiz</button>
+            </div>
+            <div class="col-4">
+                <h3 id="timeHolder" class="hide">Time Remaining: <span id="timer">150</span></h3>
+            </div>
+        </div>  
+      </div>
+      <div id="game">
+          <h3 id="question"></h3>
+          <div id="options">
+              
+          </div>
+      </div>
+    </main>
+    <script src="./assets/script.js"></script>
 </body>
 
-<script src="./script.js"></script>
+
+
 </html>
