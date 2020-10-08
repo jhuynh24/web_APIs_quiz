@@ -98,3 +98,25 @@ function newQuestion() {
         options.appendChild(button);
     }
 }
+
+function verify() {
+    console.log("verify");
+    var buttonValue = this.value;
+    var answer = questionsArray[index].answer;
+    if (buttonValue === answer) {
+        console.log("correct");
+        numCorrect++;
+        console.log(numCorrect);
+    } else {
+        console.log("incorrect");
+        timeLeft -= 5;
+    }
+    index++;
+    if (index === questionsArray.length) {
+
+        clearInterval(downloadTimer);
+        endQuiz();
+    } else {
+        newQuestion();
+    }
+}
