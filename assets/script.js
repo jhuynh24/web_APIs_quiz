@@ -5,13 +5,16 @@ var instructions = document.getElementById("instructions");
 var quizHeader = document.getElementById("quizHeader");
 var quizInstructions = document.getElementById("quizInstructions");
 var timerDisplay = document.getElementById("timer");
+var initials = document.getElementById("initialsInput");
+var label = document.getElementById("initialsLabel");
+var submitButton = document.getElementById("submitButton");
+var game = document.getElementById("game");
+var question = document.getElementById("question");
+var options = document.getElementById("options");
 var timeLeft = 150;
 var downloadTimer;
 var index = 0;
 var numCorrect = 0;
-var game = document.getElementById("game");
-var question = document.getElementById("question");
-var options = document.getElementById("options");
 
 //Code for questions array containing the objects for each question.
 var questionsArray = [{
@@ -91,17 +94,29 @@ function countDown() {
 }
 
 
-//Code for the end of the quiz. Prompts the user to enter their initials to record their score. Also uses local storage to access the verified score and records it on the High Score page.
+//Code for the end of the quiz. Shows an input so the user can enter their initials to record their score.
 function endQuiz() {
-    console.log("End quiz function called.");
-    quizInstructions.remove();
     game.classList.add("hide");
     timeHolder.classList.add("hide");
-    quizHeader.textContent = "HIGH SCORES";
-    var initials = prompt("Please enter your initials to save your score.");
-    console.log(initials);
+    quizInstructions.classList.remove("hide");
+    quizHeader.textContent = "All Done!";
+    quizInstructions.textContent = "Your final score was " + numCorrect + "!";
+    initials.classList.remove("hide");
+    label.classList.remove("hide");
+    submitButton.classList.remove("hide");
+    submitButton.onclick = showHighScores;
+
+}
+
+//Code for displaying the high scores. This uses local storage to get the list of previous scores and displays them on the High Score page along with the current score.
+function showHighScores() {
+    this.classList.add("hide");
+    initials.classList.add("hide");
+    label.classList.add("hide");
+    quizInstructions.classList.add("hide");
+    quizHeader.textContent = "High Scores";
     var currentScore = {
-        userInitials: initials,
+        userInitials: initials.value,
         userScore: numCorrect
     };
 
@@ -139,15 +154,11 @@ function newQuestion() {
 
 //Verifies the answers inputed by the user for each question inside the console. If it matches then it is marked correct. If it does not match, then it is marked incorrect. Calls the end quiz function if there are no remaining questions.
 function verify() {
-    console.log("verify");
     var buttonValue = this.value;
     var answer = questionsArray[index].answer;
     if (buttonValue === answer) {
-        console.log("correct");
         numCorrect++;
-        console.log(numCorrect);
     } else {
-        console.log("incorrect");
         timeLeft -= 5;
     }
     index++;
